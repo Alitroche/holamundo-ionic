@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +8,20 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  
+  nombre: string = '';
 
-  constructor() {}
+  constructor(
+    private controladorToast: ToastController
+  ) {}
+
+  async saludar(){
+    const toast = await this.controladorToast.create({
+      message: 'Hola '+this.nombre+'!',
+      duration: 3000,
+      position: 'bottom'
+    });
+    await toast.present();
+  }
 
 }
